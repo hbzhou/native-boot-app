@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: native-boot-ingress
+  namespace: native-boot
+  labels:
+    app: native-boot
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: boot-native.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: native-boot-service
+                port:
+                  number: 8089
+            pathType: Prefix
+            path: /customers
+  tls:
+    - hosts:
+        - boot-native.com
+      secretName: https-cert-secret

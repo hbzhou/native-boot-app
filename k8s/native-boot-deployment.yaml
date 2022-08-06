@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: native-boot
+  namespace: native-boot
+  labels:
+    app: native-boot
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: native-boot
+  template:
+    metadata:
+      labels:
+        app: native-boot
+    spec:
+      containers:
+        - name: native-boot
+          image: native-boot:0.0.1-SNAPSHOT
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8089
+              protocol: TCP
+
+
+
